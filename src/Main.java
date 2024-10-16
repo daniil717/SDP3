@@ -1,21 +1,37 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        Exercise task1 = new Exercise("Low priority task", 1);
-        Exercise task2 = new Exercise("Medium priority task", 2);
-        Exercise task3 = new Exercise("High priority task", 3);
+        Scanner scanner = new Scanner(System.in);
 
-        ExerciseCollection ExerciseCollection = new ExerciseCollection();
-        ExerciseCollection.addExercise(task1);
-        ExerciseCollection.addExercise(task2);
-        ExerciseCollection.addExercise(task3);
+        System.out.print("Enter a description for the low priority task: ");
+        String lowDesc = scanner.nextLine();
+        Exercise exercise1 = new Exercise(lowDesc, 1);
 
+        System.out.print("Enter a description for the medium priority task: ");
+        String mediumDesc = scanner.nextLine();
+        Exercise exercise2 = new Exercise(mediumDesc, 2);
+
+        System.out.print("Enter a description for the high priority task: ");
+        String highDesc = scanner.nextLine();
+        Exercise exercise3 = new Exercise(highDesc, 3);
+
+        //Exercise collection
+        ExerciseCollection exerciseCollection = new ExerciseCollection();
+        exerciseCollection.addExercise(exercise1);
+        exerciseCollection.addExercise(exercise2);
+        exerciseCollection.addExercise(exercise3);
+
+        //Chain of Responsibility
         ExerciseMediator mediator = new ExerciseMediator();
-        for (Exercise task : ExerciseCollection) {
-            mediator.processExercise(task);
+        for (Exercise exercise : exerciseCollection) {
+            mediator.processExercise(exercise);
         }
 
-        for (Exercise task : ExerciseCollection) {
-            mediator.executeExercise(task);
+        //Command pattern
+        for (Exercise exercise : exerciseCollection) {
+            mediator.executeExercise(exercise);
         }
+        scanner.close();
     }
 }
